@@ -1,0 +1,408 @@
+registration
+=============================
+package com.swings_proj1;
+import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Vector;
+import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.colorchooser.ColorChooserComponentFactory;
+import javax.swing.text.AttributeSet.FontAttribute;
+    
+public class development extends JFrame implements ActionListener,ItemListener
+{
+	private JLabel jl1,jl2,jl3,jl4,jl5,jl6,jl7,jl8,jl9;
+	private JTextField jt1,jt2,jt3;
+	private JRadioButton jr1,jr2,jr3;
+	private JPasswordField jp;
+	private JCheckBox jc1,jc2,jc3;
+	private JComboBox jcb;
+	private JButton jb1,jb2;
+	
+	
+	ImageIcon ii;
+	
+	String gender;
+	
+	String lang;
+	
+	String address;
+	
+	
+	public development()
+	{
+		jl1=new JLabel("REGISTRATION");
+		jl2=new JLabel("enter name:");
+		jl3=new JLabel("enter email:");
+		jl4=new JLabel("enter pass:");
+		jl5=new JLabel("enter cont:");
+		jl6=new JLabel("enter gender:");
+		jl7=new JLabel("enter lang:");
+		jl8=new JLabel("enter address");
+		
+		jt1=new JTextField();
+		jt2=new JTextField();
+		jt3=new JTextField();
+		
+		jp=new JPasswordField();
+		
+		jr1=new JRadioButton("male");
+		jr2=new JRadioButton("female");
+		jr3=new JRadioButton("others");
+		
+		jc1=new JCheckBox("english");
+		jc2=new JCheckBox("telugu");
+		jc3=new JCheckBox("hindi");
+		
+		Vector v=new Vector();
+			v.add("");
+			v.add("hyderabad");
+			v.add("suryapet");
+			v.add("khammam");
+			v.add("kothagudem");
+			v.add("bhadrachalam");
+			
+		jcb=new JComboBox(v);
+		
+		jb1=new JButton("submit");
+		jb2=new JButton("clear");
+		
+	      ii= new ImageIcon("C:\\Users\\tejak\\Pictures\\Saved Pictures\\java.jpg");
+		jl9=new JLabel(ii);
+		
+		
+		// calling container 
+		setLayout(null);
+		
+		//arrangements for lables
+		jl1.setBounds(350, 50, 160, 40);
+		jl2.setBounds(250, 130, 120, 40);
+		jl3.setBounds(250, 180, 120, 40);
+		jl4.setBounds(250, 230, 120, 40);
+		jl5.setBounds(250, 280, 120, 40);
+		jl6.setBounds(250, 330, 120, 40);
+		jl7.setBounds(250, 380, 120, 40);
+		jl8.setBounds(250, 430, 120, 40);
+
+		jt1.setBounds(350, 130, 120, 40);
+		jt2.setBounds(350, 180, 120, 40);
+		jp.setBounds (350, 230, 120, 40);
+		jt3.setBounds(350, 280, 120, 40);
+
+		jr1.setBounds(350, 330, 120, 40);
+		jr2.setBounds(420, 330, 120, 40);
+		jr3.setBounds(510, 330, 120, 40);
+
+		jc1.setBounds(350, 380, 120, 40);
+		jc2.setBounds(450, 380, 120, 40);
+		jc3.setBounds(550, 380, 120, 40);
+
+		jcb.setBounds(350, 430, 120, 40);
+
+		jb1.setBounds(350, 480, 120, 40);
+		jb2.setBounds(480, 480, 120, 40);
+
+		jl9.setBounds(0,0,250,500);
+		
+		
+		// adding to container
+		
+		add(jl1);
+		add(jl2);
+		add(jl3);
+		add(jl4);
+		add(jl5);
+		add(jl6);
+		add(jl7);
+		add(jl8);
+		add(jl9);
+		add(jt1);		
+		add(jt2);
+		add(jt3);
+		add(jp);		
+		add(jr1);
+		add(jr2);
+		add(jr3);
+		add(jc1);
+		add(jc2);
+		add(jc3);
+		add(jcb);
+		add(jb1);
+		add(jb2);
+		
+		jb1.addActionListener(this);
+		jr1.addActionListener(this);
+		jr2.addActionListener(this);
+		jr3.addActionListener(this);
+		jc1.addActionListener(this);
+		jc2.addActionListener(this);
+		jc3.addActionListener(this);
+		
+		jcb.addItemListener(this);
+	
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(jr1))
+		{
+			gender="male";
+			
+			jr2.setSelected(false);
+			jr3.setSelected(false);
+		}
+		 if(e.getSource().equals(jr2))
+		{
+			gender="female";
+			
+			jr1.setSelected(false);
+			jr3.setSelected(false);
+		}
+		 if(e.getSource().equals(jr3))
+		{
+			gender="others";
+			
+			jr1.setSelected(false);
+			jr2.setSelected(false);
+		}
+		
+		if(e.getSource().equals(jc1))
+		{
+			lang="english";
+			
+			jc2.setSelected(true);
+			jc3.setSelected(true);
+		}
+		if(e.getSource().equals(jc2))
+		{
+			lang="telugu";
+			
+			jc1.setSelected(true);
+			jc3.setSelected(true);
+		}
+		if(e.getSource().equals(jc3))
+		{
+			lang="hindi";
+			
+			jc2.setSelected(true);
+			jc1.setSelected(true);
+		}
+		
+		if(e.getSource().equals(jb1))
+		{
+			String name=jt1.getText();
+			String email=jt2.getText();
+			String pass=jp.getText();
+			String cont=jt3.getText();
+			try
+			{
+				Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+				Connection con=	DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","varsha");
+				System.out.println(con);
+				
+				PreparedStatement pst=	con.prepareStatement("insert into swing values(?,?,?,?,?,?,?)");
+				
+				pst.setString(1, name);
+				pst.setString(2, email);
+				pst.setString(3, pass);
+				pst.setString(4, cont);
+				pst.setString(5, gender);
+				pst.setString(6, lang);
+				pst.setString(7, address);
+				
+				int i=	pst.executeUpdate();
+				System.out.println("updated"+i);
+				
+				JOptionPane.showMessageDialog(this, "success");
+				
+			}
+			catch (Exception ee) {
+				// TODO: handle exception
+				ee.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) 
+	{
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(jcb))
+		{
+			address=(String) jcb.getSelectedItem();
+		}
+		
+	}
+	
+	
+	
+}
+================================
+
+login 
+======================
+
+package com.swings_proj1;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class login  extends JFrame implements ActionListener
+{
+	private JLabel jl,jl1,jl2;
+	private JPasswordField jp;
+	private JPasswordField jp1;
+	private JTextField jt1;
+	private JButton jb1;
+	private JButton jb2;
+	
+	public login()
+	{
+		jl=new JLabel("**LOGIN**");
+		jl1=new JLabel("enter login_id:");
+		jl2=new JLabel("enter password:");
+		jp=new JPasswordField();
+		jp1=new JPasswordField();
+		jt1=new JTextField();
+		jb1=new JButton("LOGIN");
+		jb2=new JButton("REGISTRATION");
+		
+		//calling container
+		
+		setLayout(null);
+		
+		//arranging properly in frames
+		
+		jl.setBounds (400,100,120,40);
+		jl1.setBounds(250,150,120,40);
+		jl2.setBounds(250,200,120,40);
+		
+		jt1.setBounds(450,150,180,40);
+		jp.setBounds(450,200,180,40);
+		
+		jb1.setBounds(300,320,120,40);
+		jb2.setBounds(470,320,180,40);
+		
+		// adding to container
+		add(jl);
+		add(jl1);
+		add(jl2);
+		add(jt1);
+		add(jp);
+		add(jb1);
+		add(jb2);
+		
+		jb1.addActionListener(this);
+		jb2.addActionListener(this);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(jb2))
+		{
+			development d=new development();
+			d.setTitle("REGISTRATION");
+			d.setSize(800,800);
+			d.setDefaultCloseOperation(development.EXIT_ON_CLOSE);
+			d.setVisible(true);	
+		}
+		if(e.getSource().equals(jb1))
+		{
+			String login_id=jt1.getText();
+			String password=jp.getText();
+				
+			try
+			{
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				Connection con=	DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","varsha");
+				System.out.println(con);
+				
+				PreparedStatement pst=con.prepareStatement("select * from swing");
+				ResultSet rs=pst.executeQuery();
+					
+				JOptionPane.showMessageDialog(this, "success");
+				
+				while(rs.next())
+				{
+					String db_email=	rs.getString("email");
+					String db_pass =	rs.getString("pass");
+
+					
+				if(login_id.equals(db_email) && password.equals(db_pass))
+				{
+					System.out.println("LOGIN SUCCESS");
+				}
+				else
+				{
+					System.out.println("LOGIN FAILED");
+				}
+				}
+				
+			}
+			catch (Exception ae) {
+				// TODO: handle exception
+				ae.printStackTrace();
+			}
+			
+		}
+		
+		
+	}
+}
+
+=============================
+
+execution class
+====================
+
+package com.swings_proj1;
+
+public class execution {
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+		development d=new development();
+		d.setTitle("REGISTRATION");
+		d.setSize(800,800);
+		d.setDefaultCloseOperation(development.EXIT_ON_CLOSE);
+		d.setVisible(true);
+		/*
+		login l=new login();
+		l.setTitle("LOGIN");
+		l.setSize(800,800);
+		l.setDefaultCloseOperation(development.EXIT_ON_CLOSE);
+		l.setVisible(true);	
+			*/
+
+	}
+
+}
